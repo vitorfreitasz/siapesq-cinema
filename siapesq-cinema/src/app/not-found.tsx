@@ -12,7 +12,7 @@ export default function NotFound() {
           SIAPESQ CINEMA.
         </p>
         <Link
-          href="/"
+          href="/home"
           className="mt-6 inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg text-lg font-medium"
         >
           Voltar à Página Inicial
