@@ -6,6 +6,7 @@ export interface IUsersResponse {
 export interface IUsers {
   nome: string;
   senha: string;
+  email?: string;
 }
 
 export interface IHandleLogin {

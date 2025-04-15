@@ -10,7 +10,11 @@ import React from "react";
 export default function Register() {
   const handleRegister = async (data: IUsers) => {
     "use server";
-    const response = await RegisterRequest(data?.nome, data?.senha);
+    const response = await RegisterRequest(
+      data?.nome,
+      data?.senha,
+      data?.email ? data?.email : ""
+    );
     return response;
   };
 
