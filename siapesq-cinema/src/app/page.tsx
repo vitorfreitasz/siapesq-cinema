@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React from "react";
 
-export default async function Home() {
+export default async function Root() {
   return (
-    <main className="flex flex-col items-center justify-center w-screen h-screen px-4 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
+    <main className="flex flex-col items-center justify-center w-full min-h-screen px-4 py-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-y-auto">
       <div className="text-center space-y-6 animate-fade-in">
         <h1 className="text-5xl font-extrabold tracking-tight">
           🎬 SIAPESQ CINEMA
