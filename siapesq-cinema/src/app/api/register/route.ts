@@ -1,9 +1,9 @@
 import { generateToken } from "@/constants/auth";
-import { users } from "@/constants/users";
+import { prisma } from "@/constants/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { username, password } = await req.json();
+  const { username, password, email } = await req.json();
 
   if (!username || !password) {
     return NextResponse.json(
@@ -12,12 +12,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const exists = users.find((u) => u.username === username);
-  if (exists) {
+  const existingUser = await prisma.user.findUnique({ where: { username } });
+  if (existingUser) {
     return NextResponse.json({ message: "Usuário já existe" }, { status: 409 });
   }
 
-  users.push({ username, password });
+  const user = await prisma.user.create({
+    data: { username, password, email },
+  });
+
   const token = generateToken({ username });
 
   return NextResponse.json(

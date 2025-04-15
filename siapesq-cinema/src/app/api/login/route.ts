@@ -1,5 +1,5 @@
 import { generateToken } from "@/constants/auth";
-import { users } from "@/constants/users";
+import { prisma } from "@/constants/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -13,10 +13,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const user = users.find(
-    (u) => u.username === username && u.password === password
-  );
-  if (!user) {
+  const user = await prisma.user.findUnique({ where: { username: username } });
+
+  if (!user || user.password !== password) {
     return NextResponse.json(
       { message: "Credenciais inválidas." },
       { status: 401 }
