@@ -2,12 +2,16 @@
 import CircularProgress from "@/components/circular-progress";
 import ShowMessage from "@/components/show-message";
 import { IPropsMessage } from "@/interfaces/show-message.interface";
+import { IHandleRegister } from "@/interfaces/user.interface";
 import { RegisterSchema } from "@/schemas/register.schema";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 
-export default function FormRegister() {
+export default function FormRegister({
+  handleRegister,
+  handleRedirect,
+}: IHandleRegister) {
   const [showPassword, setShowPassword] = useState(false);
   const [messageData, setMessageData] = useState<IPropsMessage>({
     message: "",
@@ -20,9 +24,9 @@ export default function FormRegister() {
       validationSchema={RegisterSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          const response = { message: "Message", error: "Error" };
+          const response = await handleRegister(values);
           if (response) {
-            if (response?.error) {
+            if (response?.isError) {
               setMessageData({
                 message: response?.message || "Erro!",
                 time: 3,
@@ -34,7 +38,10 @@ export default function FormRegister() {
                 time: 3,
                 type: "success",
               });
-              setTimeout(() => console.log("oi"), 3000);
+              setTimeout(
+                () => handleRedirect(String(response?.data?.token)),
+                3000
+              );
             }
           } else {
             throw new Error("Algo deu errado!");
@@ -53,7 +60,7 @@ export default function FormRegister() {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col w-11/12 gap-4">
+        <Form className="flex flex-col w-full sm:w-11/12 md:w-4/5 gap-4">
           <ShowMessage
             time={messageData.time}
             message={messageData.message}
