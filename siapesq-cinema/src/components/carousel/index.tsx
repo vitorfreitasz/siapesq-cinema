@@ -10,7 +10,7 @@ export default function Carousel({ moviesList }: { moviesList: Movie[] }) {
         <Link
           href={`/movie/${movie?.id}`}
           key={index}
-          className="flex flex-col min-w-[140px] sm:min-w-[160px] md:min-w-[180px] bg-gray-800 rounded-2xl p-3 shadow-md hover:scale-105 transition-transform"
+          className="flex flex-col min-w-[140px] sm:min-w-[160px] md:min-w-[180px] bg-gray-800 rounded-2xl p-3 shadow-md hover:scale-105 hover:bg-gray-700 transition-transform"
         >
           <Image
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}

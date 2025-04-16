@@ -23,26 +23,26 @@ export default function NavBar() {
       />
       <Link
         href="/home"
-        className="hover:text-blue-600 transition-colors duration-200"
+        className="text-white hover:text-blue-600 transition-colors duration-200"
       >
         Início
       </Link>
       <Link
-        href="/em-alta"
-        className="hover:text-blue-600 transition-colors duration-200"
+        href="/top-hated"
+        className="text-white hover:text-blue-600 transition-colors duration-200"
       >
-        Em alta
+        Mais amados
       </Link>
       <Link
-        href="/lancamentos"
-        className="hover:text-blue-600 transition-colors duration-200"
+        href="/now-playing"
+        className="text-white hover:text-blue-600 transition-colors duration-200"
       >
         Lançamentos
       </Link>
       <form action={handleLogout}>
         <button
           type="submit"
-          className="hover:text-blue-600 cursor-pointer transition-colors duration-200"
+          className="text-white hover:text-blue-600 cursor-pointer transition-colors duration-200"
         >
           Sair
         </button>

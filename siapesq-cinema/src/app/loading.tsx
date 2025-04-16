@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Loading() {
   return (
-    <div className="flex justify-center flex-col items-center bg-terciary w-full h-full">
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center flex-col bg-opacity-60 z-50">
       <Image
         src="/icon-sc.png"
         alt="Logo da empresa."
