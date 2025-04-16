@@ -25,6 +25,28 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+@layer utilities {
+  /* Estiliza a barra de rolagem para navegadores baseados em WebKit (Chrome, Safari) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ffffff1c;
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #ffffff38;
+  }
+}
+
 @keyframes fade-out {
   0% {
     opacity: 1;
