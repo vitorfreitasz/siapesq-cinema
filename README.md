@@ -109,10 +109,16 @@ Inicie o banco de dados:
 npx prisma migrate dev --name init
 ```
 
+Faça o build:
+
+```bash
+npm run build
+```
+
 Execute o projeto:
 
 ```bash
-npm run dev
+npm run start
 ```
 
 Pronto! O projeto estará rodando!
