@@ -1,18 +1,24 @@
 import {
   GenreResponse,
+  MovieDetail,
   MovieListResponse,
+  VideoResponse,
 } from "@/interfaces/movies.interface";
 import ApiMovies from "@/service/api-movies";
 
 //  Filmes populares
 export const GetPopularMovies = async (page: number) => {
-  const res = await ApiMovies.get("/movie/popular", { params: { page } });
+  const res = await ApiMovies.get<MovieListResponse>("/movie/popular", {
+    params: { page },
+  });
   return res.data;
 };
 
 //  Filmes em cartaz
 export const GetNowPlayingMovies = async (page: number) => {
-  const res = await ApiMovies.get("/movie/now_playing", { params: { page } });
+  const res = await ApiMovies.get<MovieListResponse>("/movie/now_playing", {
+    params: { page },
+  });
   return res.data;
 };
 
@@ -26,7 +32,7 @@ export const GetTopRatedMovies = async (page: number) => {
 
 //  Buscar filmes pelo nome
 export const GearchMoviesByName = async (query: string, page: number) => {
-  const res = await ApiMovies.get("/search/movie", {
+  const res = await ApiMovies.get<MovieListResponse>("/search/movie", {
     params: { query, page },
   });
   return res.data;
@@ -47,13 +53,13 @@ export const GetMoviesByGenre = async (genreId: number, page: number) => {
 };
 
 //  Buscar detalhes de um filme específico
-export const GetMovieDetails = async (movieId: number) => {
-  const res = await ApiMovies.get(`/movie/${movieId}`);
+export const GetMovieDetails = async (movieId: string) => {
+  const res = await ApiMovies.get<MovieDetail>(`/movie/${movieId}`);
   return res.data;
 };
 
 //  Buscar trailers.
-export const GetMovieVideos = async (movieId: number) => {
-  const res = await ApiMovies.get(`/movie/${movieId}/videos`);
+export const GetMovieVideos = async (movieId: string) => {
+  const res = await ApiMovies.get<VideoResponse>(`/movie/${movieId}/videos`);
   return res.data.results;
 };
