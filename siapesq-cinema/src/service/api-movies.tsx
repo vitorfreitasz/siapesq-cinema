@@ -6,7 +6,7 @@ const ApiMovies = axios.create({
     language: "pt-BR",
   },
   headers: {
-    Authorization: process.env.TMDB_API_KEY,
+    Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
   },
 });
 
