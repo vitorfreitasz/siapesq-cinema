@@ -18,7 +18,6 @@ export default async function Home() {
     "use server";
     const res = await GearchMoviesByName(query, 1);
     if (res && res?.results) {
-      console.log(res?.results);
       return res?.results;
     }
     return [];

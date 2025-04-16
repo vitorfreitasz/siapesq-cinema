@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Siapesq Cinema",
   description: "Para quem gosta de filmes e trabalha na SIAPESQ!",
-  icons: "./icon-sc.png"
+  icons: "/favicon.ico",
 };
 
 export default function RootLayout({
