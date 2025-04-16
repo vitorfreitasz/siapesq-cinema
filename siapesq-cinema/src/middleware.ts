@@ -5,11 +5,10 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 const publicRoutes = ["/", "/login", "/register"];
 
 export async function middleware(request: NextRequest) {
-  console.log("--Middleware--");
   const path = request.nextUrl.pathname;
   const publicRoute = publicRoutes.find((route) => path == route);
   const token = request?.cookies?.get("token");
-  console.log(publicRoute);
+
   if (!token && publicRoute) {
     //  Rota pública, sem token
     //  Deixa passar
@@ -35,17 +34,20 @@ export async function middleware(request: NextRequest) {
   if (token && !publicRoute) {
     //  Rota privada, e com token.
     // Verificar validade do token, se for válido deixa passar, se não, manda pro login.
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET!); // Pega chave da .env, e transforma de string para o tipo que a lib jose usa.
-    const validToken = jwtVerify(token?.value, secret);
-
-    if (!validToken) {
+    try {
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET!); // Pega chave da .env, e transforma de string para o tipo que a lib jose usa.
+      const validToken = await jwtVerify(token?.value, secret);
+      return NextResponse.next();
+    } catch (err) {
+      //  Caso o token seja inválido, o jwtVerify estoura um throw, ai conseguimos saber que está invalido ou expirado.
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
-      return NextResponse.redirect(redirectUrl);
+      //  Criamos o redirecionamento para o login, e apagamos o token invalido dos cookies.
+      const nextPage = NextResponse.redirect(redirectUrl);
+      nextPage?.cookies?.delete("token");
+      return nextPage;
     }
-    return NextResponse.next();
   }
-
   return NextResponse.next();
 }
 
