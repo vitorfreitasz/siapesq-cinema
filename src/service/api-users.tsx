@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ApiUsers = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "siapesq-cinema.vercel.app",
 });
 
 export default ApiUsers;
