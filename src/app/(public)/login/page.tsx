@@ -24,12 +24,12 @@ export default function Login() {
     <main className="flex flex-col items-center justify-center w-full min-h-screen px-4 py-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-y-auto">
       <div className="flex flex-col items-center justify-center bg-gray-950 w-full sm:max-w-md md:max-w-sm p-6 sm:p-8 rounded-3xl shadow-lg">
         <Image
-          src="/banner-sc.png"
+          src="/banner-sc-bgnull.png"
           alt="Logo da empresa."
           width={0}
           height={0}
           sizes="100vw"
-          className="w-3/4 sm:w-3/4 md:w-2/3 rounded-lg mb-10 mt-5"
+          className="w-3/4 sm:w-3/4 md:w-2/3 mb-10 mt-5"
         />
         <FormLogin handleRedirect={handleRedirect} handleLogin={handleLogin} />
         <p className="text-white text-sm mt-4">
