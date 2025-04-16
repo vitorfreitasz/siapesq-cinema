@@ -1,16 +1,28 @@
 import Carousel from "@/components/carousel";
+import Search from "@/components/search";
+import { MovieListResponse, Movie } from "@/interfaces/movies.interface";
 import {
+  GearchMoviesByName,
   GetGenres,
   GetMoviesByGenre,
-  GetTopRatedMovies,
+  GetPopularMovies,
 } from "@/requests/movies.request";
 import React from "react";
 
 export default async function Home() {
-  //  Get dos filmes mais bem avaliados
-  const responseTopHated = await GetTopRatedMovies(1);
-  const topHatedMovies = responseTopHated?.results;
+  //  Get dos filmes em alta
+  const responsePopularMovies = await GetPopularMovies(1);
+  const popularMovies = responsePopularMovies?.results;
 
+  const handleSearchMovie = async (query: string) => {
+    "use server";
+    const res = await GearchMoviesByName(query, 1);
+    if (res && res?.results) {
+      console.log(res?.results);
+      return res?.results;
+    }
+    return [];
+  };
   //  Get dos gêneros
   const responseGenre = await GetGenres();
   //  Get dos filmes por gênero
@@ -23,25 +35,16 @@ export default async function Home() {
   );
 
   return (
-    <div className="w-full custom-scrollbar max-w-[100vw] px-4 sm:px-6 md:px-10 py-8 space-y-12 md:max-w-7xl mx-auto">
+    <div className="w-full custom-scrollbar max-w-[100vw] px-4 sm:px-6 md:px-10 py-8 space-y-12 sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto">
       {/* Pesquisa por nome (Não implementado ainda) */}
-      <section>
-        <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4">
-          Pesquisar filmes
-        </h2>
-        <input
-          type="text"
-          placeholder="Digite o nome do filme..."
-          className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-        />
-      </section>
+      <Search handleSearch={handleSearchMovie} />
 
       {/* Carrossel de filmes mais bem avaliados */}
       <section>
         <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4">
-          Mais bem avaliados
+          Filmes em alta
         </h2>
-        <Carousel moviesList={topHatedMovies} />
+        <Carousel moviesList={popularMovies} />
       </section>
 
       {/* Carrossel de filmes por gênero */}
