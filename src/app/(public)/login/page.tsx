@@ -25,7 +25,7 @@ export default function Login() {
       <div className="flex flex-col items-center justify-center bg-gray-950 w-full sm:max-w-md md:max-w-sm p-6 sm:p-8 rounded-3xl shadow-lg">
         <Image
           src="/banner-sc-bgnull.png"
-          alt="Logo da empresa."
+          alt="Banner SIAPESQ Cinema."
           width={0}
           height={0}
           sizes="100vw"
