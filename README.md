@@ -103,6 +103,11 @@ Instale as dependências:
 ```bash
 npm install
 ```
+Inicie o banco de dados:
+
+```bash
+npx prisma migrate dev --name init
+```
 
 Execute o projeto:
 
