@@ -28,7 +28,7 @@ export default function Search({
           type="text"
           name="query"
           placeholder="Digite o nome do filme..."
-          className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </form>
       {searchedMovies[0] ? (
